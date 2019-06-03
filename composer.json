@@ -1,0 +1,19 @@
+{
+	"require": {
+		"monolog/monolog": "1.0.*",
+		"altorouter/altorouter": "1.1.0",
+		"gabordemooij/redbean": "dev-master"
+
+
+	},
+
+	"autoload": {
+		"psr-4": {
+			"Api\\": "api/",
+			"View\\": "view/",
+			"Simpla\\": "simpla/",
+			"Payment\\": "payment/",
+			"Ajax\\": "ajax/"
+		}
+	}
+}
