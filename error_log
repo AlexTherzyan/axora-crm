@@ -9419,3 +9419,22 @@ Stack trace:
 #4 /home1/lrogiixt/simpla/Smarty/libs/sysplugins/smarty_template_compiled.php(170): Smarty_Template_Resource_Base->getRenderedTemplateCode(Object(Smarty_Internal_Template))
 #5 /home1/lrogiixt/simpla/Smarty/libs/sysplugins/smarty_internal_template.php(184): Smarty_Template_Compiled->render(Object(Smarty_Internal_Template))
 #6 /home1/lrogiixt/simpla/Smarty/li in /home1/lrogiixt/simpla/api/Database.php on line 152
+[03-Jun-2019 16:14:28 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home1/lrogiixt/simpla/compiled/template/267f66c61563e35a3d795f733f400a3ff397f7d1_0.file._product.tpl.php on line 44
+[03-Jun-2019 16:14:28 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home1/lrogiixt/simpla/compiled/template/267f66c61563e35a3d795f733f400a3ff397f7d1_0.file._product.tpl.php on line 44
+[03-Jun-2019 16:14:28 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home1/lrogiixt/simpla/compiled/template/267f66c61563e35a3d795f733f400a3ff397f7d1_0.file._product.tpl.php on line 44
+[03-Jun-2019 16:14:28 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home1/lrogiixt/simpla/compiled/template/267f66c61563e35a3d795f733f400a3ff397f7d1_0.file._product.tpl.php on line 44
+[03-Jun-2019 16:14:28 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home1/lrogiixt/simpla/compiled/template/267f66c61563e35a3d795f733f400a3ff397f7d1_0.file._product.tpl.php on line 44
+[03-Jun-2019 16:14:28 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home1/lrogiixt/simpla/compiled/template/267f66c61563e35a3d795f733f400a3ff397f7d1_0.file._product.tpl.php on line 44
+[03-Jun-2019 16:14:28 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home1/lrogiixt/simpla/compiled/template/267f66c61563e35a3d795f733f400a3ff397f7d1_0.file._product.tpl.php on line 44
+[03-Jun-2019 16:14:28 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home1/lrogiixt/simpla/compiled/template/267f66c61563e35a3d795f733f400a3ff397f7d1_0.file._product.tpl.php on line 44
+[03-Jun-2019 16:14:28 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home1/lrogiixt/simpla/compiled/template/267f66c61563e35a3d795f733f400a3ff397f7d1_0.file._product.tpl.php on line 44
+[03-Jun-2019 16:14:28 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home1/lrogiixt/simpla/compiled/template/267f66c61563e35a3d795f733f400a3ff397f7d1_0.file._product.tpl.php on line 44
+[03-Jun-2019 16:14:28 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home1/lrogiixt/simpla/compiled/template/267f66c61563e35a3d795f733f400a3ff397f7d1_0.file._product.tpl.php on line 44
+[03-Jun-2019 16:14:28 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home1/lrogiixt/simpla/compiled/template/267f66c61563e35a3d795f733f400a3ff397f7d1_0.file._product.tpl.php on line 44
+[03-Jun-2019 16:14:28 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home1/lrogiixt/simpla/compiled/template/267f66c61563e35a3d795f733f400a3ff397f7d1_0.file._product.tpl.php on line 44
+[03-Jun-2019 16:14:28 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home1/lrogiixt/simpla/compiled/template/267f66c61563e35a3d795f733f400a3ff397f7d1_0.file._product.tpl.php on line 44
+[03-Jun-2019 16:14:28 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home1/lrogiixt/simpla/compiled/template/267f66c61563e35a3d795f733f400a3ff397f7d1_0.file._product.tpl.php on line 44
+[03-Jun-2019 16:14:28 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home1/lrogiixt/simpla/compiled/template/267f66c61563e35a3d795f733f400a3ff397f7d1_0.file._product.tpl.php on line 44
+[03-Jun-2019 16:14:28 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home1/lrogiixt/simpla/compiled/template/267f66c61563e35a3d795f733f400a3ff397f7d1_0.file._product.tpl.php on line 44
+[03-Jun-2019 16:14:28 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home1/lrogiixt/simpla/compiled/template/267f66c61563e35a3d795f733f400a3ff397f7d1_0.file._product.tpl.php on line 44
+[03-Jun-2019 16:14:28 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home1/lrogiixt/simpla/compiled/template/267f66c61563e35a3d795f733f400a3ff397f7d1_0.file._product.tpl.php on line 44
