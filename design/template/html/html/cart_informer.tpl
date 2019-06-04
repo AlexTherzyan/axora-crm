@@ -1,1 +1,0 @@
-{$cart->total_products}

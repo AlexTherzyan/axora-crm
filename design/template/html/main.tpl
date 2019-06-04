@@ -27,7 +27,6 @@
     </section>
 {/if}
 
-{* Рекомендуемые *}
 {get_featured_products var=featured_products }
 {if $featured_products}
     <section class="catalog-slider-section">
@@ -39,23 +38,6 @@
         </div>
     </section>
 {/if}
-
-
-{* Показываем бренды которые указаны в админке *}
-{get_brands var=brands show_on_main=1}
-{if $brands}
-    <div id="all_brands">
-        <h2>Все бренды:</h2>
-        {foreach $brands as $b}
-            {if $b->image}
-                <a href="brands/{$b->url}"><img src="{$config->brands_images_dir}{$b->image}" alt="{$b->name|escape}"></a>
-            {else}
-                <a href="brands/{$b->url}">{$b->name}</a>
-            {/if}
-        {/foreach}
-    </div>
-{/if}
-
 
 {get_posts var=posts limit=3}
 {if $posts}
