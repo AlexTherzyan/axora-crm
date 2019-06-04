@@ -11,7 +11,6 @@ class ManagerAdmin extends Simpla
     {
         if ($this->request->method('post')) {
 
-            dd($_POST);
             $manager            = new \stdClass();
             $manager->old_login = $this->request->post('old_login');
             $manager->login     = $this->request->post('login');
