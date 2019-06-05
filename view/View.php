@@ -67,6 +67,12 @@ class View extends Simpla
                 $this->design->assign('favorites', explode(',',$_COOKIE['favorites']) );
             }
 
+
+            // для seo, если есть get параметр page добавляем
+            if (isset( $_GET['page'] )) {
+                $this->design->assign('is_page_get_parameter', true);
+            }
+
             // Текущая страница (если есть)
             $subdir = substr(dirname(dirname(__FILE__)), strlen($_SERVER['DOCUMENT_ROOT']));
             $page_url = trim(substr($_SERVER['REQUEST_URI'], strlen($subdir)), "/");

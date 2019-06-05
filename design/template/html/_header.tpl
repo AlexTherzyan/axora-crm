@@ -8,6 +8,10 @@
     <meta name="description" content="{$meta_description|escape}" />
     <meta name="keywords"    content="{$meta_keywords|escape}" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {* добавляем мета тег если пагинация *}
+    {if $is_page_get_parameter}
+        <meta name='robots' content='noindex,follow'/>
+    {/if}
 
     {* Канонический адрес страницы *}
     {if isset($canonical)}<link rel="canonical" href="{$config->root_url}{$canonical}"/>{/if}
