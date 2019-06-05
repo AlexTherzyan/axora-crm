@@ -16,12 +16,20 @@
 		</li>
 	{/if}
 
-	{if in_array('tags', $manager->permissions)}<li><a href="index.php?module=TagsAdmin">Теги</a></li>{/if}
-
-
 	<li class="active">
 		<a href="index.php?module=FeaturesAdmin">Свойства</a>
 	</li>
+
+	{if in_array('banners', $manager->permissions)}
+		<li>
+			<a href="index.php?module=BannersAdmin">Баннеры</a>
+		</li>
+	{/if}
+
+	{if in_array('tags', $manager->permissions)}<li><a href="index.php?module=TagsAdmin">Теги</a></li>{/if}
+
+
+
 
 
 

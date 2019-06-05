@@ -5,6 +5,7 @@
 	{if in_array('brands', $manager->permissions)}<li><a href="index.php?module=BrandsAdmin">Бренды</a></li>{/if}
 	{if in_array('features', $manager->permissions)}<li><a href="index.php?module=FeaturesAdmin">Свойства</a></li>{/if}
 	<li class="active"><a href="index.php?module=BannersAdmin">Баннеры</a></li>
+	{if in_array('tags', $manager->permissions)}<li><a href="index.php?module=TagsAdmin">Теги</a></li>{/if}
 {/capture}
 {if $banner->id}
 	{$meta_title = $banner->name scope=root}

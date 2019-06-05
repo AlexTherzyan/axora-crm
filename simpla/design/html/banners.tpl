@@ -10,9 +10,11 @@
 			<a href="index.php?module=CategoriesAdmin">Категории</a>
 		</li>
 	{/if}
-	<li >
-		<a href="index.php?module=BrandsAdmin">Бренды</a>
-	</li>
+	{if in_array('brands', $manager->permissions)}
+		<li>
+			<a href="index.php?module=BrandsAdmin">Бренды</a>
+		</li>
+	{/if}
 	{if in_array('features', $manager->permissions)}
 		<li>
 			<a href="index.php?module=FeaturesAdmin">Свойства</a>

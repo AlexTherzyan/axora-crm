@@ -4,6 +4,7 @@
 	{if in_array('brands', $manager->permissions)}<li><a href="index.php?module=BrandsAdmin">Бренды</a></li>{/if}
 	{if in_array('features', $manager->permissions)}<li><a href="index.php?module=FeaturesAdmin">Свойства</a></li>{/if}
 	{if in_array('colors', $manager->permissions)}<li><a href="index.php?module=ColorsAdmin">Цвета</a></li>{/if}
+	{if in_array('banners', $manager->permissions)}<li><a href="index.php?module=BannersAdmin">Баннеры</a></li>{/if}
 	<li class="active"><a href="index.php?module=TagsAdmin">Теги</a></li>
 {/capture}
 
