@@ -24,6 +24,10 @@
 		</li>
 	{/if}
 
+	{if in_array('tags', $manager->permissions)}
+		<li><a href="index.php?module=TagsAdmin">Теги</a></li>
+	{/if}
+
 {/capture}
 
 {if $product->id}
