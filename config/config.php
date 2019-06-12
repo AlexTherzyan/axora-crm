@@ -75,7 +75,7 @@ watermark_file = simpla/files/watermark/watermark.png;
 [files]
 
 ;Директория хранения цифровых товаров
-downloads_dir = files/downloads/;
+downloads_dir = files/uploads/;
 
 [debug]
 debug = true;
