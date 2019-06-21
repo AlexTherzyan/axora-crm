@@ -2,6 +2,8 @@
 
 namespace Api;
 
+use stdClass;
+
 class Cart extends Simpla
 {
 
@@ -12,13 +14,14 @@ class Cart extends Simpla
      */
     public function get_cart()
     {
-        $cart = new \stdClass();
+        $cart = new stdClass();
         $cart->purchases = array();
         $cart->total_price = 0;
         $cart->total_products = 0;
         $cart->coupon = null;
         $cart->discount = 0;
         $cart->coupon_discount = 0;
+
 
         // Берем из сессии список variant_id=>amount
         if (!empty($_SESSION['shopping_cart'])) {
@@ -29,7 +32,7 @@ class Cart extends Simpla
                 $items = array();
                 $products_ids = array();
                 foreach ($variants as $variant) {
-                    $items[$variant->id] = new \stdClass();
+                    $items[$variant->id] = new stdClass();
                     $items[$variant->id]->variant = $variant;
                     $items[$variant->id]->amount = $session_items[$variant->id];
                     $products_ids[] = $variant->product_id;
@@ -40,7 +43,7 @@ class Cart extends Simpla
                 foreach ($items as $variant_id=>$item) {
                     $purchase = null;
                     if (!empty($products[$item->variant->product_id])) {
-                        $purchase = new \stdClass();
+                        $purchase = new stdClass();
                         $purchase->product = $products[$item->variant->product_id];
                         $purchase->variant = $item->variant;
                         $purchase->amount = $item->amount;
@@ -77,6 +80,43 @@ class Cart extends Simpla
                 }
             }
         }
+
+        // Способы доставки
+        $deliveries = $this->delivery->get_deliveries(array('enabled' => 1));
+        //  получаем выбранную доставку или берем первую
+        if ( isset($_COOKIE['delivery_id'])) {
+            $cart->сurrent_delivery =  $this->delivery->get_delivery($_COOKIE['delivery_id']);
+        } else {
+            $cart->сurrent_delivery = $deliveries[0];
+            $expire = time() + 60 * 60 * 24;
+            setcookie('delivery_id', $deliveries[0]->id ,$expire,'/');
+        }
+
+        $cart = $this->calculateCartTotalPriceIncludingDelivery($cart);
+
+
+        return $cart;
+    }
+
+
+    /**
+     *   просчитываем общую сумму с учетом доствки
+     * @param $cart
+     * @param $delivery
+     * @return mixed
+     */
+    public function calculateCartTotalPriceIncludingDelivery($cart)
+    {
+        //  просчитываем общую сумму с учетом доствки
+        if ($cart->сurrent_delivery ) {
+            if($cart->total_price <  $cart->сurrent_delivery->free_from) {
+                $cart->total_price_without_delivery = $cart->total_price;
+                $cart->total_price +=  $cart->сurrent_delivery->price;
+                $cart->delivery_price =  $cart->сurrent_delivery->price;
+            }
+        }
+
+
 
         return $cart;
     }
