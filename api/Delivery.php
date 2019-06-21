@@ -5,6 +5,10 @@ namespace Api;
 class Delivery extends Simpla
 {
 
+    const FREE_DELIVERY = 1;
+    const PAID_DELIVERY = 0;
+
+
     /**
      * @param  $id
      * @return false|object
