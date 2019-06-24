@@ -12,11 +12,23 @@ class CartView extends View
     {
         parent::__construct();
 
+
+
         // Если передан id варианта, добавим его в корзину
         if ($variant_id = $this->request->get('variant', 'integer')) {
             $this->cart->add_item($variant_id, $this->request->get('amount', 'integer'));
             header('Location: ' . $this->config->root_url . '/cart', true, 302);
             exit();
+        }
+
+
+        // очищаем корзину полностью
+        if (isset($_POST['clear_cart'])) {
+            $this->cart->empty_cart();
+            if (!isset($_POST['submit_order']) || $_POST['submit_order'] != 1) {
+                header('Location: ' . $this->config->root_url . '/cart', true, 302);
+                exit();
+            }
         }
 
         // Удаление товара из корзины
