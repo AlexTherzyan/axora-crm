@@ -34,10 +34,10 @@
                 <td class="basket__cell basket__cell_price">
                     {if $purchase->variant->compare_price > 0}
                         <div class="basket__price-old">
-                            {$purchase->variant->compare_price|convert} {$currency->sign|escape}
+                            {$purchase->variant->compare_price} {$currency->sign|escape}
                         </div>
                     {/if}
-                    <div class="basket__price">{($purchase->variant->price)|convert} {$currency->sign}</div>
+                    <div class="basket__price">{($purchase->variant->price)} {$currency->sign}</div>
                 </td>
 
                 <td class="basket__cell basket__cell_count">
@@ -54,7 +54,7 @@
 
                 <td class="basket__cell basket__cell_total">
                     <div class="basket__total-price">
-                        {($purchase->variant->price*$purchase->amount)|convert}&nbsp;{$currency->sign}
+                        {($purchase->variant->price*$purchase->amount)}&nbsp;{$currency->sign}
                     </div>
                 </td>
 
