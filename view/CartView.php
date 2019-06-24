@@ -4,6 +4,7 @@ namespace View;
 
 
 use Api\Delivery;
+use stdClass;
 
 class CartView extends View
 {
@@ -23,7 +24,7 @@ class CartView extends View
 
 
         // очищаем корзину полностью
-        if (isset($_POST['clear_cart'])) {
+        if ( isset($_GET['delete_variant']) &&  $_GET['delete_variant'] == 'all') {
             $this->cart->empty_cart();
             if (!isset($_POST['submit_order']) || $_POST['submit_order'] != 1) {
                 header('Location: ' . $this->config->root_url . '/cart', true, 302);
@@ -43,7 +44,7 @@ class CartView extends View
         // Если нажали оформить заказ
         if (isset($_POST['checkout'])) {
 
-            $order = new \stdClass();
+            $order = new stdClass();
             $order->delivery_id = $this->request->post('delivery_id', 'integer');
             $order->name = $this->request->post('name');
             $order->email = $this->request->post('email');
@@ -110,7 +111,6 @@ class CartView extends View
                         'delivery_price' => $delivery->price,
                         'separate_delivery' => $cart->total_price > $delivery->free_from ? Delivery::FREE_DELIVERY : Delivery::PAID_DELIVERY,
                     ));
-
                 }
 
                 // Отправляем письмо пользователю
