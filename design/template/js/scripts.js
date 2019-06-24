@@ -898,24 +898,24 @@ $('.js-validation-cart-form').each(function() {
  * FancyBox 3 - register form
  * @see  http://fancyapps.com/fancybox/3/
  */
-$(document).on('click', '.js-validation-cart-form', function(e){
-    e.preventDefault();
-    $(current.$slide).find('.js-validation-cart-form').each(function() {
-        $(this).validate({
-            errorPlacement: function(error, element) {
-                if ($(element).is(':checkbox') || $(element).is(':radio')) {
-                    error.insertAfter($(element).closest('label'));
-                } else {
-                    error.insertAfter(element);
-                }
-            },
-            submitHandler: function (form) {
-
-            }
-        });
-    });
-
-});
+// $(document).on('click', '.js-validation-cart-form', function(e){
+//     e.preventDefault();
+//     $(current.$slide).find('.js-validation-cart-form').each(function() {
+//         $(this).validate({
+//             errorPlacement: function(error, element) {
+//                 if ($(element).is(':checkbox') || $(element).is(':radio')) {
+//                     error.insertAfter($(element).closest('label'));
+//                 } else {
+//                     error.insertAfter(element);
+//                 }
+//             },
+//             submitHandler: function (form) {
+//                 // form.submit();
+//             }
+//         });
+//     });
+//
+// });
 
 
 
