@@ -1,185 +1,190 @@
-{* Шаблон корзины *}
+<?php
 
-{$meta_title = "Корзина" scope=root}
+namespace View;
 
-<ul class="breadcrumbs">
-	<li class="breadcrumbs__item">
-		<a href="home.php" class="breadcrumbs__link">Главная</a>
-	</li>
-	<li class="breadcrumbs__item">Корзина</li>
-</ul>
 
-<h1>Корзина</h1>
+use Api\Delivery;
+use stdClass;
 
-{if $cart->purchases}
-	<form class="js-validation-cart-form"  method="post" name="cart">
-		{*	Товары	*}
-		{include file="_cart_product_table.tpl"}
+class CartView extends View
+{
 
-		<div class="basket-footer">
-			<div class="basket-footer__total">
-				<div class="basket-footer__total-main">Итого к оплате: {if $cart->total_price_without_delivery}{$cart->total_price_without_delivery|convert}{else}{$cart->total_price|convert}{/if}&nbsp;{$currency->sign}</div>
-				<div class="basket-footer__total-info">Цена без учета доставки</div>
-			</div>
+    public function __construct()
+    {
+        parent::__construct();
 
-			<div class="basket-footer__buttons">
-				{*	Купоны	*}
-				{if $coupon_request}
-					<div class="basket-footer__buttons-item">
-						<div class="basket-footer__cupon">
-							{if $coupon_error}
-								{if $coupon_error == 'invalid'}
-									<div class="alert alert-danger" role="alert">
-										Купон недействителен
-									</div>
-								{/if}
-							{/if}
 
-							{if $cart->coupon->min_order_price > 0 &&  $cart->total_price|floatval < $cart->coupon->min_order_price|floatval   }
-								<div class="alert alert-danger" role="alert">
-									Купон {$cart->coupon->code|escape} действует для заказов от {$cart->coupon->min_order_price|convert} {$currency->sign}
-								</div>
-							{/if}
 
-							{if $cart->coupon->min_order_price  &&   $cart->total_price|floatval >= $cart->coupon->min_order_price|floatval }
-								<div class="alert alert-success" role="alert">
-								<span style="font-size: 12px">
+        // Если передан id варианта, добавим его в корзину
+        if ($variant_id = $this->request->get('variant', 'integer')) {
+            $this->cart->add_item($variant_id, $this->request->get('amount', 'integer'));
+            header('Location: ' . $this->config->root_url . '/cart', true, 302);
+            exit();
+        }
 
-									Купон принят, ваша скидка&nbsp;{$cart->coupon_discount|convert}&nbsp;{$currency->sign}
-								</span>
-								</div>
-							{/if}
 
-							<div class="form-row">
-								<div class="col flex-grow-1">
-									<input type="text" class="search__input form-control" placeholder="Код купона" name="coupon_code" value="{$cart->coupon->code|escape}">
-								</div>
-								<div class="col-auto">
-									<button type="submit" class="search__btn btn btn-info" onclick="document.cart.submit();"><i class="fas fa-chevron-right"></i></button>
-								</div>
-							</div>
-						</div>
-					</div>
-				{/if}
+        // очищаем корзину полностью
+        if ( isset($_GET['delete_variant']) &&  $_GET['delete_variant'] == 'all') {
+            $this->cart->empty_cart();
+            if (!isset($_POST['submit_order']) || $_POST['submit_order'] != 1) {
+                header('Location: ' . $this->config->root_url . '/cart', true, 302);
+                exit();
+            }
+        }
 
-				<div class="basket-footer__buttons-item">
-					<form  method="post">
-						<button type="submit" name="clear_cart" class="basket-footer__button btn btn-light">Очистить корзину</button>
-					</form>
-				</div>
+        // Удаление товара из корзины
+        if ($delete_variant_id = intval($this->request->get('delete_variant'))) {
+            $this->cart->delete_item($delete_variant_id);
+            if (!isset($_POST['submit_order']) || $_POST['submit_order'] != 1) {
+                header('Location: ' . $this->config->root_url . '/cart', true, 302);
+                exit();
+            }
+        }
 
-				<div class="basket-footer__buttons-item">
-					<a href="#order" class="basket-footer__button btn btn-info js-target-link">Перейти к оформлению заказа</a>
-				</div>
-			</div>
-		</div>
+        // Если нажали оформить заказ
+        if (isset($_POST['checkout'])) {
 
-		<section class="order" id="order">
-			<h2 class="order__title">Оформление заказа</h2>
+            $order = new stdClass();
+            $order->delivery_id = $this->request->post('delivery_id', 'integer');
+            $order->name = $this->request->post('name');
+            $order->email = $this->request->post('email');
+            $order->address = $this->request->post('address');
+            $order->phone = $this->request->post('phone');
+            $order->comment = $this->request->post('comment');
+            $order->payment_method_id = $this->request->post('payment_method_id');
+            $order->ip = $_SERVER['REMOTE_ADDR'];
+            $this->design->assign('delivery_id', $order->delivery_id);
+            $this->design->assign('name', $order->name);
+            $this->design->assign('email', $order->email);
+            $this->design->assign('phone', $order->phone);
+            $this->design->assign('address', $order->address);
+            $this->design->assign('payment_method_id', $order->payment_method_id);
 
-			<form action="order.php" class="order__form js-validation-form">
-				<div class="order__content row">
-					<section class="order__step col-md">
-						<h3 class="order__step-title">Данные покупателя</h3>
+//            $captcha_code = $this->request->post('captcha_code', 'string');
 
-						<div class="form-group">
-							<label for="orderName">Ваше Ф.И.О. <span class="color-red">*</span></label>
-							<input type="text" class="form-control" id="orderName" name="name" value="{$name|escape}" required>
-						</div>
-						<div class="form-group">
-							<label for="orderEmail">E-mail <span class="color-red">*</span></label>
-							<input type="email" class="form-control" id="orderEmail" name="email" value="{$email|escape}" required>
-						</div>
-						<div class="form-group">
-							<label for="orderPhone">Телефон <span class="color-red">*</span></label>
-							<input type="text" class="form-control" id="orderPhone" name="phone"  value="{$phone|escape}" required>
-						</div>
+            // Скидка
+            $cart = $this->cart->get_cart();
 
-						<div class="form-group">
-							<label for="order_comment">Комментарий к&nbsp;заказу</label>
-							<textarea class="form-control" name="comment" id="order_comment"></textarea>
-						</div>
-						<p><span class="color-red">*</span> — поля, обязательно для заполнения</p>
-					</section>
+            $order->discount = $cart->discount;
+            if ($cart->coupon) {
+                $order->coupon_discount = $cart->coupon_discount;
+                $order->coupon_code = $cart->coupon->code;
+            }
 
-					<section class="order__step col-md">
-						<h3 class="order__step-title">Доставка</h3>
+            if (!empty($this->user->id)) {
+                $order->user_id = $this->user->id;
+            }
 
-						<div class="order__delivery-type">
-							<div class="order__delivery-type-title">Выберите способ доставки</div>
-							{if $deliveries}
-								<div class="order__delivery-type-section is-open">
+            if (empty($order->name)) {
+                $this->design->assign('error', 'empty_name');
+            } elseif (empty($order->email)) {
+                $this->design->assign('error', 'empty_email');
+            }
+            else {
+                // Добавляем заказ в базу
 
-									{foreach  $deliveries as $delivery}
-									<div class="form-check">
-										<label class="form-check__label">
 
-											<input class="order__delivery-type-input form-check__input "
-												   type="radio"
-												   name="delivery_id"
-												   value="{$delivery->id}"
-												   id="deliveries_{$delivery->id}"
-												   {if $current_delivery_id == $delivery->id}checked{/if}
-											>
+                $order_id = $this->orders->add_order($order);
 
-											<span class="form-check__text">
-												{$delivery->name}
-												{if $cart->total_price < $delivery->free_from && $delivery->price>0}
-													({$delivery->price|convert}&nbsp;{$currency->sign})
-												{elseif $cart->total_price >= $delivery->free_from}
-													(бесплатно)
-												{/if}
-											</span>
-											<span class="form-check__subtext">{$delivery->description}</span>
-										</label>
-									</div>
-									{/foreach}
-									<div class="order__delivery-type-section-content">
-										<div class="form-group">
-											<label>Адрес</label>
-											<input name="address" value="{$address|escape}" type="text" class="form-control">
-										</div>
 
-									</div>
-								</div>
-							{/if}
-						</div>
-					</section>
+                $_SESSION['order_id'] = $order_id;
 
-					<section class="order__step col-md">
-						<h3 class="order__step-title">Подтверждение заказа</h3>
+                // Если использовали купон, увеличим количество его использований
+                if ($cart->coupon) {
+                    $this->coupons->update_coupon($cart->coupon->id, array('usages' => $cart->coupon->usages + 1));
+                }
 
-						<div class="form-group">
-							<label for="orderPaymentType">Выберите способ оплаты</label>
-							<select class="form-control" id="orderPaymentType" name="payment_method_id">
-								{foreach $payment_methods as $payment_method}
-									<option value="{$payment_method->id}" name="payment_method_id"  {if $payment_method_id==$payment_method->id} selected{elseif $payment_method@first} selected {/if}  >
-										{$payment_method->name|escape}
-									</option>
-								{/foreach}
-							</select>
-						</div>
+                // Добавляем товары к заказу
+                foreach ($this->request->post('amounts') as $variant_id => $amount) {
+                    $this->orders->add_purchase(array('order_id' => $order_id, 'variant_id' => intval($variant_id), 'amount' => intval($amount)));
+                }
 
-						<div class="order__total">
-							<div class="order__total-title">Общая сумма заказа:&nbsp;</div>
-							<div class="order__total-value">{$cart->total_price|convert}&nbsp;{$currency->sign}</div>
-						</div>
+                $order = $this->orders->get_order($order_id);
 
-						<div class="form-check">
-							<label class="form-check__label">
-								<input type="checkbox" class="form-check__input" name="orderAgreement" data-msg-required="Обязательный пункт" required>
-								<span class="form-check__text">Я соглашаюсь на обработку моих персональных данных и принимаю <a href="/politika-konfidentsialnosti">Политику конфиденциальности</a></span>
-							</label>
-						</div>
+                // Стоимость доставки
+                $delivery = $this->delivery->get_delivery($order->delivery_id);
 
-						<div class="order__btn-row">
-							<button name="checkout" type="submit" class="order__btn btn btn-info btn-lg btn-block">Подтвердить и заказать</button>
-						</div>
-					</section>
-				</div>
-			</form>
-		</section>
-	</form>
-{else}
-	<p>В корзине нет товаров</p>
-{/if}
+
+
+                if (!empty($delivery) && $delivery->free_from > $order->total_price  ) {
+                    $this->orders->update_order($order->id, array(
+                        'delivery_price' => $delivery->price,
+                        'separate_delivery' => $cart->total_price > $delivery->free_from ? Delivery::FREE_DELIVERY : Delivery::PAID_DELIVERY,
+                    ));
+                }
+
+                // Отправляем письмо пользователю
+                $this->notify->email_order_user($order->id);
+
+                // Отправляем письмо администратору
+                $this->notify->email_order_admin($order->id);
+
+                // Очищаем корзину (сессию)
+                $this->cart->empty_cart();
+
+                // Перенаправляем на страницу заказа
+                header('Location: ' . $this->config->root_url . '/order/' . $order->url, true, 302);
+                exit();
+            }
+        } else {
+
+
+            // Если нам запостили amounts, обновляем их
+            if ($amounts = $this->request->post('amounts')) {
+                foreach ($amounts as $variant_id => $amount) {
+                    $this->cart->update_item($variant_id, $amount);
+                }
+
+                $coupon_code = trim($this->request->post('coupon_code', 'string'));
+                if (empty($coupon_code)) {
+                    $this->cart->apply_coupon('');
+                    header('Location: ' . $this->config->root_url . '/cart', true, 302);
+                    exit();
+                } else {
+                    $coupon = $this->coupons->get_coupon((string)$coupon_code);
+
+                    if (empty($coupon) || !$coupon->valid) {
+                        $this->cart->apply_coupon($coupon_code);
+                        $this->design->assign('coupon_error', 'invalid');
+                    } else {
+                        $this->cart->apply_coupon($coupon_code);
+                        header('Location: ' . $this->config->root_url . '/cart', true, 302);
+                        exit();
+                    }
+                }
+            }
+        }
+    }
+
+    public function fetch()
+    {
+        // Варианты оплаты
+        $payment_methods = $this->payment->get_payment_methods(array('enabled' => 1));
+        $this->design->assign('payment_methods', $payment_methods);
+
+        // Данные пользователя
+        if ($this->user) {
+            $last_order = $this->orders->get_orders(array('user_id' => $this->user->id, 'limit' => 1));
+            $last_order = reset($last_order);
+            if ($last_order) {
+                $this->design->assign('name', $last_order->name);
+                $this->design->assign('email', $last_order->email);
+                $this->design->assign('phone', $last_order->phone);
+                $this->design->assign('address', $last_order->address);
+            } else {
+                $this->design->assign('name', $this->user->name);
+                $this->design->assign('email', $this->user->email);
+                $this->design->assign('phone',  $this->user->phone);
+                $this->design->assign('address',  $this->user->address);
+            }
+        }
+
+        // Если существуют валидные купоны, нужно вывести инпут для купона
+        if ($this->coupons->count_coupons(array('valid' => 1)) > 0) {
+            $this->design->assign('coupon_request', true);
+        }
+
+        // Выводим корзину
+        return $this->design->fetch('cart.tpl');
+    }
+}
