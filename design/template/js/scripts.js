@@ -767,22 +767,23 @@ $(document).on('change', '.js-change-variant', function(){
      */
     var cart_product_ids = $('[name=cart-product-ids]').val().split(',');
     var price, compare_price, sku;
-    var variant_id = $(this).data('variant-id');
-    var variant_infinity = $(this).data('variant-infinity');
-    var variant_stock = $(this).data('variant-stock');
     var currency = $('input[name=currency]').val();
 
+    //если варианты товара выводятся списком
     if ($(this).is('select')) {
         var selected = $(this).find('option:selected');
+
+        console.log(selected.data('variant-infinity'));
 
         sku = selected.data('sku');
         price = selected.data('price');
         compare_price = selected.data('compare-price');
 
         renderPrices(price, compare_price, currency, sku);
-        renderCartButton(cart_product_ids,variant_id, variant_infinity, variant_stock)
+        renderCartButton(cart_product_ids,selected.data('variant-id'), selected.data('variant-infinity'), selected.data('variant-stock'))
     }
 
+    //если варианты товара выводятся радиокнопками
     if ($(this).is('input')) {
         var checked = $(this).filter(':checked');
 
@@ -791,7 +792,7 @@ $(document).on('change', '.js-change-variant', function(){
         compare_price = checked.data('compare-price');
 
         renderPrices(price, compare_price, currency, sku);
-        renderCartButton(cart_product_ids,variant_id, variant_infinity, variant_stock)
+        renderCartButton(cart_product_ids,$(this).data('variant-id'), $(this).data('variant-infinity'), $(this).data('variant-stock'))
     }
 });
 
@@ -820,7 +821,7 @@ function renderCartButton(cart_product_ids,variant_id, variant_infinity, variant
             btn_name= 'Добавить в корзину';
         }
 
-        console.log(cart_product_ids.indexOf(variant_id.toString()));
+
         if ( cart_product_ids.indexOf(variant_id.toString()) >= 0 ) {
             btn_name = 'В корзине';
             is_active = 'is-active';
