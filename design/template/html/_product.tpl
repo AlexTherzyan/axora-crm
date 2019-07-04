@@ -69,7 +69,7 @@
                             <span class="item__btn-not-allow">Нет в наличии</span>
                         {else}
                             <input type="hidden" name="variant" value="{$product->variant->id}">
-                            <button {if $product->variant->infinity == 1}  data-toggle="tooltip" data-html="true" title="Под заказ" {/if} type="submit" class="basket-btn btn btn-light {if in_array($product->id, $cart_product_ids)}is-active{/if}">
+                            <button {if $product->variant->infinity == 1}  data-toggle="tooltip" data-html="true" title="Под заказ" {/if} type="submit" class="basket-btn btn btn-light {if in_array($product->variant->id, $cart_product_ids)}is-active{/if}">
                                 <i class="fal fa-shopping-cart"></i>
                                 {if $product->variant->infinity == 1}
                                     <span class="basket-btn__text">Под заказ</span>
