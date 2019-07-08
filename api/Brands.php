@@ -180,4 +180,25 @@ class Brands extends Simpla
             }
         }
     }
+    
+    public function getCategoriesByBrand($brand_id)
+    {
+
+        $query = $this->db->placehold("
+				SELECT c.name, count(pc.product_id) as products_count, c.parent_id, c.id, c.url, p.brand_id
+				FROM __products_categories pc
+				LEFT JOIN __categories c ON c.id=pc.category_id
+				INNER JOIN __products p ON p.id=pc.product_id AND pc.position=(SELECT MIN(pc2.position) FROM __products_categories pc2 WHERE pc.product_id=pc2.product_id)
+				WHERE 1
+				AND p.visible=1 
+				AND p.brand_id=? 
+				AND (SELECT count(*)>0 FROM __variants pv WHERE pv.product_id=p.id AND pv.price>0 AND (pv.stock IS NULL OR pv.stock>0) LIMIT 1) = 1
+				GROUP BY pc.category_id
+				ORDER BY products_count DESC", $brand_id);
+
+        $this->db->query($query);
+
+        return $this->db->results();
+    }
+    
 }
