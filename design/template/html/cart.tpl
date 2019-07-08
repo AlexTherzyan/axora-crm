@@ -72,11 +72,11 @@
 			</div>
 		</div>
 
-		<section class="order" id="order">
+	<section class="order" id="order">
 			<h2 class="order__title">Оформление заказа</h2>
 
 {*			<form method="post" class="order__form js-validation-cart-form">*}
-				<div class="order__content row">
+				<div class="order__content row js-cart-info-area">
 					<section class="order__step col-md">
 						<h3 class="order__step-title">Данные покупателя</h3>
 
@@ -95,7 +95,7 @@
 
 						<div class="form-group">
 							<label for="order_comment">Комментарий к&nbsp;заказу</label>
-							<textarea class="form-control" name="comment" id="order_comment"></textarea>
+							<textarea class="form-control" name="comment" id="order_comment">{$comment|escape}</textarea>
 						</div>
 						<p><span class="color-red">*</span> — поля, обязательно для заполнения</p>
 					</section>
@@ -143,6 +143,40 @@
 							{/if}
 						</div>
 					</section>
+
+					<section class="order__step col-md">
+						<h3 class="order__step-title">Подтверждение заказа</h3>
+
+						<div class="form-group">
+							<label for="orderPaymentType">Выберите способ оплаты</label>
+							<select class="form-control" id="orderPaymentType" name="payment_method_id">
+								{foreach $payment_methods as $payment_method}
+									<option value="{$payment_method->id}" name="payment_method_id"  {if $payment_method_id==$payment_method->id} selected{elseif $payment_method@first} selected {/if}  >
+										{$payment_method->name|escape}
+									</option>
+								{/foreach}
+							</select>
+						</div>
+
+						<div class="order__total">
+							<div class="order__total-title">Общая сумма заказа:&nbsp;</div>
+							<div class="order__total-value">{$cart->total_price}&nbsp;{$currency->sign}</div>
+						</div>
+
+						<div class="form-check">
+							<label class="form-check__label">
+								<input type="checkbox" class="form-check__input" name="orderAgreement" data-msg-required="Обязательный пункт" required>
+								<span class="form-check__text">Я соглашаюсь на обработку моих персональных данных и принимаю <a href="/politika-konfidentsialnosti">Политику конфиденциальности</a></span>
+							</label>
+						</div>
+
+						<div class="order__btn-row">
+							<button name="checkout" type="submit" class="order__btn btn btn-info btn-lg btn-block">Подтвердить и заказать</button>
+						</div>
+					</section>
+				</div>
+{*			</form>*}
+		</section>
 
 					<section class="order__step col-md">
 						<h3 class="order__step-title">Подтверждение заказа</h3>
