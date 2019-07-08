@@ -930,9 +930,15 @@ $(document).ready(function () {
             method: 'post',
             data: {
                 delivery_id: $(this).val(),
+                name    : $('#orderName').val(),
+                email   : $('#orderEmail').val(),
+                phone   : $('#orderPhone').val(),
+                address : $('[name=address]').val(),
+                comment : $('#order_comment').val(),
             },
             dataType: 'json',
             success: function () {
+
 
                 location.reload();
 
