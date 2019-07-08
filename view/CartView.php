@@ -44,6 +44,7 @@ class CartView extends View
         // Если нажали оформить заказ
         if (isset($_POST['checkout'])) {
 
+
             $order = new stdClass();
             $order->delivery_id = $this->request->post('delivery_id', 'integer');
             $order->name = $this->request->post('name');
@@ -161,7 +162,6 @@ class CartView extends View
         // Варианты оплаты
         $payment_methods = $this->payment->get_payment_methods(array('enabled' => 1));
         $this->design->assign('payment_methods', $payment_methods);
-
         // Данные пользователя
         if ($this->user) {
             $last_order = $this->orders->get_orders(array('user_id' => $this->user->id, 'limit' => 1));
@@ -178,6 +178,28 @@ class CartView extends View
                 $this->design->assign('address',  $this->user->address);
             }
         }
+
+            if (isset($_COOKIE['order_name'])) {
+                $this->design->assign('name', $_COOKIE['order_name']);
+
+            }
+            if (isset($_COOKIE['order_email'])) {
+                $this->design->assign('email', $_COOKIE['order_email']);
+
+            }
+            if (isset($_COOKIE['order_phone'])) {
+                $this->design->assign('phone', $_COOKIE['order_phone']);
+
+            }
+            if (isset($_COOKIE['order_address'])) {
+                $this->design->assign('address', $_COOKIE['order_address']);
+
+            }
+            if (isset($_COOKIE['order_comment'])) {
+                $this->design->assign('comment', $_COOKIE['order_comment']);
+
+            }
+
 
         // Если существуют валидные купоны, нужно вывести инпут для купона
         if ($this->coupons->count_coupons(array('valid' => 1)) > 0) {
