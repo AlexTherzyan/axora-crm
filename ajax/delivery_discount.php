@@ -16,6 +16,33 @@ class DeliveryDiscount extends Simpla
     {
         $expire = time() + 60 * 60 * 24;
         setcookie('delivery_id', $_POST['delivery_id'] ,$expire,'/');
+
+        if (!empty($_POST['name'])) {
+            setcookie('order_name', $_POST['name'] ,$expire,'/');
+        }
+
+
+        if (!empty($_POST['email'])) {
+            setcookie('order_email', $_POST['email'] ,$expire,'/');
+
+        }
+
+        if (!empty($_POST['phone'])) {
+            setcookie('order_phone', $_POST['phone'] ,$expire,'/');
+
+        }
+
+        if (!empty($_POST['address'])) {
+            setcookie('order_address', $_POST['address'] ,$expire,'/');
+
+        }
+
+        if (!empty($_POST['comment'])) {
+            setcookie('order_comment', $_POST['comment'] ,$expire,'/');
+
+        }
+
+
         return $_POST['delivery_id'];
     }
 }
