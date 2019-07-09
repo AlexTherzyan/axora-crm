@@ -605,27 +605,31 @@ $(document).ready(function() {
             amount =  $('input[name=amount]').val();
         }
 
-        $.ajax({
-            url: "ajax/cart.php",
-            data: {variant: variant, amount: amount},
-            dataType: 'json',
-            success: function(data){
-                $('.js-cart-informer').html(data);
+		   $.ajax({
+			url: "ajax/cart.php",
+			data: {variant: variant, amount: amount},
+			dataType: 'json',
+			success: function(data){
+				$('.js-cart-informer').html(data);
 
-                //добавляем айдишник добавленного варианта, используется для вывода разных  кнопок добавления в корзину
-                var cart_product_ids_el = $('[name=cart-product-ids]');
-                if( cart_product_ids_el.length > 0) {
-                    var ids = [];
-                        ids = ids.concat(cart_product_ids_el.val().split(',').push(variant)).join(',');
-                    console.log(ids);
-                    cart_product_ids_el.val(ids);
-                }
+				//добавляем айдишник добавленного варианта, используется для вывода разных  кнопок добавления в корзину
+				var cart_product_ids_el = $('[name=cart-product-ids]');
 
-            },
-            error: function (request, status, error) {
-                console.log(error);
-            }
+				if( cart_product_ids_el.length > 0) {
+					var  arrIds;
+
+					arrIds = cart_product_ids_el.val().split(',');
+					arrIds.push(variant);
+					cart_product_ids_el.val(arrIds.join(','));
+
+			}
+
+		},
+		error: function (request, status, error) {
+			console.log(error);
+		}
         });
+
 
         var $this = $(this),
             $basketBtn = $('.control__btn_basket'),
