@@ -235,6 +235,83 @@ $(document).ready(function() {
         });
     });
 
+	
+	
+    /**
+     *  Recovery pass form Validation
+     * @see  http://jqueryvalidation.org/validate/
+    */
+    $('.js-validation-recovery-form').each(function() {
+        var $form = $(this);
+        $form.validate({
+            errorPlacement: function(error, element) {
+                if ($(element).is(':checkbox') || $(element).is(':radio')) {
+                    error.insertAfter($(element).closest('label'));
+                } else {
+                    error.insertAfter(element);
+                }
+            }
+        });
+    });
+
+    /**
+     * Окно восстановления пароля пользователя
+     * FancyBox 3 - login form
+     * @see  http://fancyapps.com/fancybox/3/
+     */
+    $(document).on('click', '.js-popup-open-recovery', function(e){
+        e.preventDefault();
+        $.fancybox.close();
+        $.fancybox.open({
+            src  : $(this).attr('href') || $(this).data('src'),
+            type : $(this).data('type') || 'inline',
+            opts : {
+                afterShow : function(instance, current) {
+                    $(current.$slide).find('.js-validation-recovery-form').each(function() {
+                        $(this).validate({
+                            errorPlacement: function(error, element) {
+                                if ($(element).is(':checkbox') || $(element).is(':radio')) {
+                                    error.insertAfter($(element).closest('label'));
+                                } else {
+                                    error.insertAfter(element);
+                                }
+                            },
+                            submitHandler: function (form) {
+                                $.ajax({
+                                    url: "ajax/user_login.php",
+                                    method : 'post',
+                                    data: {
+                                        email: $('.js-validation-recovery-form').find('[name=email]').val(),
+                                        password_remind: 1,
+                                    },
+                                    dataType: 'json',
+                                    success: function(data){
+                                        if (data.response.error) {
+                                            $('#recovery-error').html(data.response.error);
+                                        } else {
+                                            $('#recovery-error').text('');
+                                            $('#recovery-success').html(data.response.success);
+                                            $('.js-validation-recovery-form').find('[name=email]').prop('disabled', true);
+                                        }
+                                    },
+                                    error: function (request, status, error) {
+                                        console.log(error);
+                                    }
+                                });
+                            }
+                        });
+                    });
+                }
+            }
+        });
+    });
+
+
+
+
+
+	
+	
     /**
      *  Register form Validation
      * @see  http://jqueryvalidation.org/validate/
