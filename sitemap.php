@@ -1,20 +1,18 @@
 <?php
 
-/**
- * Simpla CMS
- *
- * @copyright	2017 Denis Pikusov
- * @link		http://simplacms.ru
- * @author		Denis Pikusov
- *
- */
-
-require_once('api/Simpla.php');
-$simpla = new Simpla();
+require 'vendor/autoload.php';
+use Api\Simpla;
 
 header("Content-type: text/xml; charset=UTF-8");
 print '<?xml version="1.0" encoding="UTF-8"?>'."\n";
 print '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'."\n";
+
+
+
+
+// Главная страница
+
+$simpla = new Simpla();
 
 // Главная страница
 $url = $simpla->config->root_url;
