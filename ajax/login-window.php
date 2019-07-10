@@ -17,7 +17,7 @@
         </div>
 
         <p class="text-center">
-            <button type="button" class="btn btn-light js-popup-open-login" data-type="ajax" data-src="ajax/password-recovery-window.php">Забыли свой пароль?</button>
+            <button type="button" class="btn btn-light js-popup-open-recovery" data-type="ajax" data-src="ajax/password-recovery-window.php">Забыли свой пароль?</button>
         </p>
 
         <div class="form-row">
