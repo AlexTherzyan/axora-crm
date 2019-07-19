@@ -162,6 +162,7 @@
 					<option value="add_old_price">Добавить старую цену</option>
 					<option value="delete_old_price">Удалить старую цену</option>
 					<option value="move_old_price_to_price_and_clear_her">Переместить старую цену в обычную</option>
+					<option value="clone_price_to_old">Дублировать обычную цену в старую</option>
 
 					<option value="delete">Удалить</option>
 				</select>
