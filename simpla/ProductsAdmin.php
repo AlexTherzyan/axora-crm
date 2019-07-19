@@ -224,49 +224,51 @@ class ProductsAdmin extends Simpla
                 }
 
                 case 'update_price':
+                {
+
+                    $plus_or_minus 	= $this->request->post('plus_or_minus_update_price');
+                    $number 		= $this->request->post('number_update_price');
+                    $symbol 		= $this->request->post('symbol_update_price');
+
+
+
+                    if($number > 0)
+                    {
+                        $set_sql = '';
+
+                        if($plus_or_minus == 'plus')
                         {
-
-                            $plus_or_minus 	= $this->request->post('plus_or_minus');
-                            $number 		= $this->request->post('number');
-                            $symbol 		= $this->request->post('symbol');
-
-                            if($number > 0)
-                            {
-                                $set_sql = '';
-
-                                if($plus_or_minus == 'plus')
-                                {
-                                    $set_sql .= '+';
-                                }
-                                else
-                                {
-                                    $set_sql .= '-';
-                                }
-                                if($symbol == 'percent')
-                                {
-                                    $set_sql .= '(price/100*'.$number.')';
-                                }
-                                elseif($symbol == 'currency')
-                                {
-                                    $set_sql .= $number;
-                                }
-
-                                // $query = $this->db->placehold("UPDATE __variants SET price=CEIL((price$set_sql)/1000)*1000 WHERE product_id IN(?@)", $ids);
-                                // $this->db->query($query);
-
-                                // $query = $this->db->placehold("UPDATE __variants SET compare_price=CEIL((compare_price$set_sql)/1000)*1000 WHERE product_id IN(?@) AND compare_price > 0", $ids);
-                                //$this->db->query($query);
-                                $query = $this->db->placehold("UPDATE __variants SET price=(price$set_sql) WHERE product_id IN(?@)", $ids);
-                                $this->db->query($query);
-
-                                $query = $this->db->placehold("UPDATE __variants SET compare_price=(compare_price$set_sql) WHERE product_id IN(?@) AND compare_price > 0", $ids);
-                                $this->db->query($query);
-
-                            }
-
-
-                            break;
+                            $set_sql .= '+';
                         }
+                        else
+                        {
+                            $set_sql .= '-';
+                        }
+                        if($symbol == 'percent')
+                        {
+                            $set_sql_compare = $set_sql . '(compare_price/100*'.$number.')';
+                            $set_sql .= '(price/100*'.$number.')';
+
+                        }
+                        elseif($symbol == 'currency')
+                        {
+                            $set_sql_compare = $set_sql . $number;
+                            $set_sql .= $number;
+                        }
+
+
+                        $query = $this->db->placehold("UPDATE __variants SET price=(price$set_sql) WHERE product_id IN(?@)", $ids);
+                        $this->db->query($query);
+
+                        $query = $this->db->placehold("UPDATE __variants SET compare_price=(compare_price$set_sql_compare) WHERE product_id IN(?@) AND compare_price > 0", $ids);
+                        $this->db->query($query);
+
+                    }
+
+
+                    break;
+                }
+                
                 case 'add_old_price':
                     $number 		= $this->request->post('number');
                     $symbol 		= $this->request->post('symbol');
