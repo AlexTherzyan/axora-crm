@@ -198,14 +198,14 @@
 			</span>
 
 			<span id="update_price" style="display: none;">
-				<select name="plus_or_minus">
+				<select name="plus_or_minus_update_price">
 					<option value="plus">+</option>
 					<option value="minus">-</option>
 				</select>
 
-				<input name="number" type="number" min="1"  step=0.01 value="1" style="width: 60px;">
+				<input name="number_update_price" type="number" min="1" step="0.01"  value="1" style="width: 60px;">
 
-				<select name="symbol">
+				<select name="symbol_update_price">
 					<option value="percent">%</option>
 					<option value="currency">{$currency->sign}</option>
 				</select>
