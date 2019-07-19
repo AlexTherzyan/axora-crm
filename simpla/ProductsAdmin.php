@@ -296,7 +296,10 @@ class ProductsAdmin extends Simpla
                     $query = $this->db->placehold("UPDATE __variants SET price=compare_price, compare_price=0 WHERE product_id IN(?@)", $ids);
                     $this->db->query($query);
                     break;
-
+                case 'clone_price_to_old':
+                    $query = $this->db->placehold("UPDATE __variants SET compare_price=price WHERE product_id IN(?@)", $ids);
+                    $this->db->query($query);
+                    break;
 
                 case 'set_new':
                     {
