@@ -1,15 +1,8 @@
 <?php
 
-/**
- * Simpla CMS
- *
- * @copyright	2017 Denis Pikusov
- * @link		http://simplacms.ru
- * @author		Denis Pikusov
- *
- */
 
-require_once('api/Simpla.php');
+require_once ('vendor/autoload.php');
+use Api\Simpla;
 $simpla = new Simpla();
 
 header("Content-type: text/xml; charset=UTF-8");
