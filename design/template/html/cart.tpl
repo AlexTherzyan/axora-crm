@@ -92,6 +92,11 @@
 							<label for="orderPhone">Телефон <span class="color-red">*</span></label>
 							<input type="text" class="form-control" id="orderPhone" name="phone"  value="{$phone|escape}" required>
 						</div>
+						
+						<div class="form-group">
+							<label for="address">Адрес <span class="color-red">*</span></label>
+							<input name="address" value="{$address|escape}" type="text" class="form-control" required>
+						</div>
 
 						<div class="form-group">
 							<label for="order_comment">Комментарий к&nbsp;заказу</label>
@@ -132,13 +137,7 @@
 											</label>
 										</div>
 									{/foreach}
-									<div class="order__delivery-type-section-content">
-										<div class="form-group">
-											<label>Адрес</label>
-											<input name="address" value="{$address|escape}" type="text" class="form-control">
-										</div>
-
-									</div>
+									
 								</div>
 							{/if}
 						</div>
