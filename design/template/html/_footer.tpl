@@ -25,7 +25,7 @@
                         <p>
                             <a href="tel:+375333920788">+375 33 392-07-88</a><br/>
                             <a href="tel:+375291145925">+375 29 114-59-25</a><br/>
-                            <button type="button" class="footer__callback-btn link js-popup-open" data-type="ajax" data-src="ajax/callback-window.php">Заказать звонок</button>
+                           {* <button type="button" class="footer__callback-btn link js-popup-open" data-type="ajax" data-src="ajax/callback-window.php">Заказать звонок</button> *}
                         </p>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                         <div class="payment-list">
                             <a href="#"><i class="fab fa-cc-mastercard"></i></a>
                             <a href="#"><i class="fab fa-cc-visa"></i></a>
-                            <a href="#"><i class="fab fa-cc-paypal"></i></a>
+                           {* <a href="#"><i class="fab fa-cc-paypal"></i></a> *}
                         </div>
                     </div>
                 </div>
