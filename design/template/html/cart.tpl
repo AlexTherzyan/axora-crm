@@ -148,13 +148,19 @@
 
 						<div class="form-group">
 							<label for="orderPaymentType">Выберите способ оплаты</label>
-							<select class="form-control" id="orderPaymentType" name="payment_method_id">
-								{foreach $payment_methods as $payment_method}
-									<option value="{$payment_method->id}" name="payment_method_id"  {if $payment_method_id==$payment_method->id} selected{elseif $payment_method@first} selected {/if}  >
-										{$payment_method->name|escape}
-									</option>
+							{foreach $payment_methods as $payment_method}
+									<div class="form-check">
+										<label class="form-check__label">
+											<input class="order__delivery-type-input form-check__input "
+												   type="radio"
+												   name="payment_method_id"
+												   value="{$payment_method->id}"
+													{if $payment_method_id==$payment_method->id} checked{elseif $payment_method@first} checked {/if}
+											>
+											<span class="form-check__text">{$payment_method->name|escape}</span>
+										</label>
+									</div>
 								{/foreach}
-							</select>
 						</div>
 
 						<div class="order__total">
