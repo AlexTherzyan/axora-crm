@@ -25,6 +25,7 @@
     <link href="design/{$settings->theme|escape}/lib/slick-1.9.0/slick.css" rel="stylesheet">
 
     <link href="design/{$settings->theme|escape}/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="design/{$settings->theme|escape}/css/media.css" rel="stylesheet" type="text/css" />
     <script src="design/{$settings->theme|escape}/lib/jquery-3.3.1/jquery-3.3.1.min.js"></script>
 
     {*========== icons ====================	*}
