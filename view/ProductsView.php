@@ -173,7 +173,7 @@ class ProductsView extends View
         }
         $this->design->assign('filter', $filter);
         // Постраничная навигация
-        $items_per_page = $this->request->get('limit') ?: 12;
+        $items_per_page = $this->request->get('limit') ?: $this->settings->products_num;
         // Текущая страница в постраничном выводе
         $current_page = $this->request->get('page', 'integer');
         // Если не задана, то равна 1
