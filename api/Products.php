@@ -108,11 +108,13 @@ class Products extends Simpla
                     break;
                 case 'price':
                     //$order = 'pv.price IS NULL, pv.price=0, pv.price';
+                    //$order = '(SELECT -pv.price FROM __variants pv WHERE  p.id = pv.product_id  LIMIT 1) DESC';
                     $order = '(SELECT -pv.price FROM __variants pv WHERE (pv.stock IS NULL OR pv.stock>0) AND p.id = pv.product_id AND pv.position=(SELECT MIN(position) FROM __variants WHERE (stock>0 OR stock IS NULL) AND product_id=p.id LIMIT 1) LIMIT 1) DESC';
                     break;
                 case 'price_asc':
                     //$order = 'pv.price IS NULL, pv.price=0, pv.price';
-                    $order = '(SELECT -pv.price FROM __variants pv WHERE (pv.stock IS NULL OR pv.stock>0) AND p.id = pv.product_id AND pv.position=(SELECT MIN(position) FROM __variants WHERE (stock>0 OR stock IS NULL) AND product_id=p.id LIMIT 1) LIMIT 1)';
+                    $order = '(SELECT -pv.price FROM __variants pv  WHERE p.id = pv.product_id LIMIT 1) ASC';
+//                     $order = '(SELECT -pv.price FROM __variants pv WHERE (pv.stock IS NULL OR pv.stock>0) AND p.id = pv.product_id AND pv.position=(SELECT MIN(position) FROM __variants WHERE (stock>0 OR stock IS NULL) AND product_id=p.id LIMIT 1) LIMIT 1)';
                     break;
             }
         }
