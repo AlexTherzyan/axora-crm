@@ -1047,6 +1047,31 @@ $('.js-feedback_form').each(function() {
 });
 
 
+function addAjaxFeedback(data, $btn) {
+
+    $.ajax({
+        url: "ajax/add_feedback.php",
+        method : 'post',
+        data: data,
+        dataType: 'json',
+        success: function(result){
+            $btn.attr("disabled", true);
+
+            if (result.success === true) {
+                $btn.text('Сообщение отправлено');
+            } else {
+                $btn.text('Произошла ошибка отправки');
+            }
+
+        },
+        error: function (request, status, error) {
+            console.log(error);
+        }
+    });
+
+}
+
+
 
 
 
