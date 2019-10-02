@@ -23,13 +23,15 @@ class AddFeedbackAjax extends Simpla
             try {
                 $this->collectData(['phone', 'name'], $data);
 
-                $this->addToCollect(['ip' =>$_SERVER['REMOTE_ADDR'] ]);
+                $this->addToCollect('ip', $_SERVER['REMOTE_ADDR']);
+                $this->addToCollect('message' ,'Заказ Звонка' );
 
 
                 $id = $this->feedbacks->add_feedback($this->collectData);
                 $this->notify->email_feedback_admin($id);
             } catch (Exception $exception) {
                 $this->result = false;
+                $this->errors[] = $exception;
             }
 
         }
@@ -56,15 +58,15 @@ class AddFeedbackAjax extends Simpla
                 $this->errors[] = 'field ' . $field . ' does not exist';
                 $this->result = false ;
             } else {
-                $this->addToCollect($data[$field]);
+                $this->addToCollect($field, $data[$field]);
             }
         }
 
     }
 
-    private function addToCollect($data)
+    private function addToCollect($key, $value)
     {
-        $this->collectData[] = $data;
+        $this->collectData[$key] = $value;
         return $this;
     }
 
