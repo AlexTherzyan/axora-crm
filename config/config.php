@@ -78,7 +78,7 @@ watermark_file = simpla/files/watermark/watermark.png;
 downloads_dir = files/uploads/;
 
 [debug]
-debug = true;
+debug = false;
 
 
 
