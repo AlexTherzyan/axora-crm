@@ -126,6 +126,7 @@
 						<a class="preview" title="Предпросмотр в новом окне" href="../products/{$product->url}" target="_blank"></a>
 						<a class="enable" title="Активен" href="#"></a>
 						<a class="new" title="Новинка" href="#"> </a>
+						<a class="discounted" title="Акция" href="#">%</a>
 						<a class="featured" title="Рекомендуемый" href="#"></a>
 						<a class="duplicate" title="Дублировать" href="#"></a>
 
