@@ -894,7 +894,7 @@ div#sort_links a {
 }
 
 #list .product_name {
-	width: 485px;
+	width: 465px;
 	*position: relative;
 }
 
@@ -1017,8 +1017,8 @@ div#sort_links a {
 #list .icons {
 	float: right;
 	text-align: right;
-	padding-right: 10px;
-	padding-left: 10px;
+	padding-right: 2px;
+	padding-left: 2px;
 	white-space: nowrap;
 	zoom: 1;
 }
