@@ -66,9 +66,6 @@
 					<a type="submit"  href="cart/remove/all"   class="basket-footer__button btn btn-light">Очистить корзину</a>
 				</div>
 
-				<div class="basket-footer__buttons-item">
-					<a href="#order" class="basket-footer__button btn btn-info js-target-link">Перейти к оформлению заказа</a>
-				</div>
 			</div>
 		</div>
 
