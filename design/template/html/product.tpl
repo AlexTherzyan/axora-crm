@@ -51,7 +51,7 @@
 					{include file="_stickers.tpl" is_product_page=true}
 
 					<div class="product__control">
-						<button  type="button" data-product-id="{$product->id}" class="favorite-btn js-add-favorites js-favorites-{$product->id} {if  in_array($product->id, $favorites)}is-active{/if} "><i class="fal fa-heart"></i></button>
+						<button  type="button" data-product-id="{$product->id}" class="favorite-btn js-add-favorites js-favorites-{$product->id} {if $favorites &&  in_array($product->id, $favorites)}is-active{/if} "><i class="fal fa-heart"></i></button>
 						<button type="button" class="compare-btn js-add-compare js-add-compare-{$product->id} {if in_array($product->id, $compares)} is-active{/if}" data-product-id="{$product->id}">
 							<i class="fal fa-balance-scale "></i>
 						</button>
