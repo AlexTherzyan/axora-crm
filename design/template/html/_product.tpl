@@ -9,7 +9,7 @@
                 {include file="_stickers.tpl"}
 
                 <div class="item__control">
-                    <button type="button" data-product-id="{$product->id}" class="favorite-btn js-add-favorites js-favorites-{$product->id} {if  in_array($product->id, $favorites)}is-active{/if} "><i class="fal fa-heart"></i></button>
+                    <button type="button" data-product-id="{$product->id}" class="favorite-btn js-add-favorites js-favorites-{$product->id} {if $favorites &&  in_array($product->id, $favorites)}is-active{/if} "><i class="fal fa-heart"></i></button>
 
                     {* если находимся на странице сравнения *}
                     {if $is_compares}
