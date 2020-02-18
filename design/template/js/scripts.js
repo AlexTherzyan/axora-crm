@@ -8,7 +8,7 @@ $(document).ready(function() {
 
     $(".js-autocomplete-search").devbridgeAutocomplete({
         serviceUrl:'ajax/search_products.php',
-        minChars:1,
+        minChars: 2,
         groupBy: 'type',
         width: 'auto',
         forceFixPosition: false,
