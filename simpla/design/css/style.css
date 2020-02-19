@@ -1141,6 +1141,19 @@ span.order_label {
 	background-image: url(../images/star_gray.png);
 }
 
+.icons a.discounted{
+	text-decoration: none!important;
+}
+
+.icons a.discounted:before {
+	content: '%';
+}
+
+.discounted .icons a.discounted:before {
+	content: '%';
+	color: red;
+}
+
 .icons a.new {
 	background-image: url(../images/new.png);
 	-webkit-filter: grayscale(100%);
