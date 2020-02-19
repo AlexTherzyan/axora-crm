@@ -85,7 +85,7 @@
 
 		<div id="list">
 			{foreach $products as $product}
-				<div class="row  {if $product->new}new{/if}  {if !$product->visible} invisible{/if}{if $product->featured} featured{/if}">
+				<div class="row  {if $product->new}new{/if} {if $product->discounted}discounted{/if}  {if !$product->visible} invisible{/if}{if $product->featured} featured{/if}">
 					<input type="hidden" name="positions[{$product->id}]" value="{$product->position}">
 					<div class="move cell">
 						<div class="move_zone"></div>
@@ -559,6 +559,34 @@
 						line.addClass('new');
 					else
 						line.removeClass('new');
+				},
+				dataType: 'json'
+			});
+			return false;
+		});
+
+// Сделать акцией
+		$("a.discounted").click(function () {
+			var icon = $(this);
+			var line = icon.closest("div.row");
+			var id = line.find('input[type="checkbox"][name*="check"]').val();
+			var state = line.hasClass('discounted') ? 0 : 1;
+			icon.addClass('loading_icon');
+			$.ajax({
+				type: 'POST',
+				url: 'ajax/update_object.php',
+				data: {
+					'object': 'product',
+					'id': id,
+					'values': {'discounted': state},
+					'session_id': '{/literal}{$smarty.session.id}{literal}'
+				},
+				success: function (data) {
+					icon.removeClass('loading_icon');
+					if (state)
+						line.addClass('discounted');
+					else
+						line.removeClass('discounted');
 				},
 				dataType: 'json'
 			});
