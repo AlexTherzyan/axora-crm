@@ -249,7 +249,9 @@
 			<a href="{url keyword=null brand_id=null category_id=null page=null filter='featured'}">Рекомендуемые</a>
 		</li>
 
-
+	<li{if $filter=='new'} class="selected"{/if}>
+			<a href="{url keyword=null brand_id=null category_id=null page=null filter='new'}">Новинки</a>
+		</li>
 
 		<li{if $filter=='discounted'} class="selected"{/if}>
 			<a href="{url keyword=null brand_id=null category_id=null page=null filter='discounted'}">Со скидкой</a>
