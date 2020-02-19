@@ -527,6 +527,12 @@
 			<input name=visible value="1" type="checkbox" id="active_checkbox"{if $product->visible} checked{/if}/>
 			<label for="active_checkbox">Активен</label>
 		</div>
+		 <div class="checkbox">
+            <input name="discounted" value="1" type="checkbox"
+                   id="featured_checkbox"{if $product->discounted} checked{/if}/>
+            <label for="featured_checkbox">Акция</label>
+        </div>
+		
 		<div class="checkbox">
 			<input name="featured" value="1" type="checkbox" id="featured_checkbox"{if $product->featured} checked{/if}/>
 			<label for="featured_checkbox">Рекомендуемый</label>
