@@ -529,8 +529,8 @@
 		</div>
 		 <div class="checkbox">
             <input name="discounted" value="1" type="checkbox"
-                   id="featured_checkbox"{if $product->discounted} checked{/if}/>
-            <label for="featured_checkbox">Акция</label>
+                   id="discounted_checkbox"{if $product->discounted} checked{/if}/>
+            <label for="discounted_checkbox">Акция</label>
         </div>
 		
 		<div class="checkbox">
