@@ -52,7 +52,9 @@ class ProductsAdmin extends Simpla
                 $filter['visible'] = 0;
             } elseif ($f == 'outofstock') {
                 $filter['in_stock'] = 0;
-            }
+              } elseif ($f == 'new') {
+            $filter['new'] = 1;
+        }
             $this->design->assign('filter', $f);
         }
 
