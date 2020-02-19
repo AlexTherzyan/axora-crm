@@ -77,8 +77,11 @@ class Products extends Simpla
             $is_new_filter = $this->db->placehold('AND p.new=?', intval($filter['new']));
         }
 
-        if (isset($filter['discounted'])) {
-            $discounted_filter = $this->db->placehold('AND (SELECT 1 FROM __variants pv WHERE pv.product_id=p.id AND pv.compare_price>0 LIMIT 1) = ?', intval($filter['discounted']));
+        //if (isset($filter['discounted'])) {
+          //  $discounted_filter = $this->db->placehold('AND (SELECT 1 FROM __variants pv WHERE pv.product_id=p.id AND pv.compare_price>0 LIMIT 1) = ?', intval($filter['discounted']));
+        //}
+         if (isset($filter['discounted'])) {
+            $is_new_filter = $this->db->placehold('AND p.discounted=?', intval($filter['discounted']));
         }
 
         if (isset($filter['in_stock'])) {
@@ -157,6 +160,7 @@ class Products extends Simpla
 					p.annotation,
 					p.body,
 					p.position,
+                    p.discounted,	
 					p.created AS created,
 					p.visible,
 					p.featured,
@@ -260,6 +264,10 @@ class Products extends Simpla
         if (isset($filter['discounted'])) {
             $discounted_filter = $this->db->placehold('AND (SELECT 1 FROM __variants pv WHERE pv.product_id=p.id AND pv.compare_price>0 LIMIT 1) = ?', intval($filter['discounted']));
         }
+        
+        if (isset($filter['discounted'])) {
+            $is_new_filter = $this->db->placehold('AND p.discounted=?', intval($filter['discounted']));
+        }
 
         if (isset($filter['visible'])) {
             $visible_filter = $this->db->placehold('AND p.visible=?', intval($filter['visible']));
@@ -322,6 +330,7 @@ class Products extends Simpla
                                  p.name,
                                  p.annotation,
                                  p.body,
+                                 p.discounted,	
                                  p.position,
                                  p.created as created,
                                  p.visible,
