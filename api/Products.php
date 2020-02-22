@@ -459,6 +459,11 @@ class Products extends Simpla
                 $product['url'] = $product['url'].'_2';
             }
         }
+        
+         if (empty($product['discounted'])){
+            unset($product['discounted']);
+        }
+
 
         if ($this->db->query("INSERT INTO __products SET ?%", $product)) {
             $id = $this->db->insert_id();
