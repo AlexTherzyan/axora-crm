@@ -560,7 +560,7 @@ $(document).ready(function() {
     /**
      * Tabs
      */
-    $('.tabs__nav-link').on('click', function(e){
+    $(document).on('click','.tabs__nav-link', function(e){
         e.preventDefault();
         var $this = $(this);
         var $tabs = $this.closest('.tabs');
