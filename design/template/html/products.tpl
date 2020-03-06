@@ -86,7 +86,7 @@
 			</div>
 		{/if}
 	{else}
-		<div class="catalog-section__aside">
+		<div data-ajax-filter class="catalog-section__aside">
 			{include file="_filter.tpl"}
 		</div>
 	{/if}
