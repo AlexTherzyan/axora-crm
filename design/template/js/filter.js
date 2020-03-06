@@ -6,7 +6,8 @@ $(document).ready(function(){
     $tags_content = $('.filter__tags-content');
 
 
-    $('.js-filter-checkbox').on('change', function(e){
+
+    $(document).on('change','.js-filter-checkbox', function(e){
         var $input = $(this),
         id = $input.attr('id'),
         text = $input.next('.form-check__text').find('.filter__check-text').text();
@@ -20,7 +21,7 @@ $(document).ready(function(){
         updateCatalog();
     });
 
-    $('.js-filter-select').on('change', function(e){
+    $(document).on('change','.js-filter-select', function(e){
         var $input = $(this),
         id = $input.attr('id'),
         text = $input.val();
@@ -133,7 +134,7 @@ $(document).ready(function(){
         });
     });
 
-    $('.filter__section-title').on('click', function(e){
+    $(document).on('click','.filter__section-title', function(e){
         $(this).closest('.filter__section').toggleClass('is-open');
     });
 
@@ -269,6 +270,7 @@ $(document).ready(function(){
 
                     $('[data-ajax-products]').html( $(data).find('[data-ajax-products]').html() );
                     $('[data-ajax-pagination]').html( $(data).find('[data-ajax-pagination]').html() );
+                    $('[data-ajax-filter]').html( $(data).find('[data-ajax-filter]').html() );
                 },
                 fail: function() {
                     window.location = url;
