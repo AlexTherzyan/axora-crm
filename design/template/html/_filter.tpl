@@ -73,21 +73,20 @@
                     {* АКЦИИ  END *}
 
                     {* PRICE_RANGE *}
-                    <div class="filter__section is-open">
+                     <div class="filter__section is-open">
                         <div class="filter__section-title">Цена, руб.</div>
                         <div class="filter__section-content">
                             <div class="js-filter-range" id="r01">
                                 <div class="form-row">
                                     <div class="form-group col-6">
                                         <label for="filterPriceStart" style="margin: 0;">от</label>
-                                        <input type="text" class="form-control form-control-sm js-integar-input js-filter-range-start" id="filterPriceStart" name="min_price" data-min="{$min_price}"  required>
+                                        <input {if isset($smarty.get.min_price)} value="{$smarty.get.min_price}" {/if}  type="text" class="form-control form-control-sm js-integar-input js-filter-range-start" id="filterPriceStart" name="min_price" data-min="{$min_price}"  required>
                                     </div>
                                     <div class="form-group col-6">
                                         <label for="filterPriceEnd" style="margin: 0;">до</label>
-                                        <input type="text" class="form-control form-control-sm js-integar-input js-filter-range-end" id="filterPriceEnd" name="max_price" data-max="{$max_price}" required>
+                                        <input {if isset($smarty.get.max_price)} value="{$smarty.get.max_price}" {/if} type="text" class="form-control form-control-sm js-integar-input js-filter-range-end" id="filterPriceEnd" name="max_price" data-max="{$max_price}" required>
                                     </div>
                                 </div>
-                                <div class="js-filter-range-slider" data-range-min="0" data-range-max="100000" data-range-values="[0, 100000]" data-range-step="100"></div>
                             </div>
                         </div>
                     </div>
