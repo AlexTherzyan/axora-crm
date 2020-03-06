@@ -100,7 +100,7 @@
                                 {break}
                             {/if}
                             {if $f->options|count > 1}
-                                <div class="filter__section ">
+                                <div class="filter__section is-open">
                                     <div class="filter__section-title">{$f->name}</div>
                                     <div class="filter__section-content">
                                         {foreach $f->options as $k => $o}
