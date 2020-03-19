@@ -205,7 +205,7 @@
 					<option value="minus">-</option>
 				</select>
 
-				<input name="number_update_price" type="number" min="1" step="0.01"  value="1" style="width: 60px;">
+				<input name="number_update_price" type="number" min="0.01" step="0.01"  value="1" style="width: 60px;">
 
 				<select name="symbol_update_price">
 					<option value="percent">%</option>
