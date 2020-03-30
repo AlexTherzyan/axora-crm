@@ -127,6 +127,30 @@ class ProductAdmin extends Simpla
                             $this->categories->add_product_category($product->id, $category->category_id, $i);
                         }
                     }
+                    
+                     // Документы
+                    if ( !empty($_FILES['documents']['name'])) {
+
+                        $countfiles = count($_FILES['documents']['name']);
+
+                        for($i=0;$i<$countfiles;$i++){
+                            $filename = time() . $_FILES['documents']['name'][$i];
+                            move_uploaded_file($_FILES['documents']['tmp_name'][$i],$this->config->root_dir.$this->config->documents_dir.$filename);
+
+                            $this->document->add(
+                                $product->id,
+                                $filename,
+                                $_POST['document']['name'][$i]
+                            );
+
+                        }
+                    }
+
+                    if ( !empty($_POST['exist_document'])) {
+                        foreach ( $_POST['exist_document'] as $id => $documentName ) {
+                            $this->document->updateName($id, ['name' => $documentName]);
+                        }
+                    }
 
                     // Варианты
                     if (is_array($variants)) {
@@ -309,6 +333,8 @@ class ProductAdmin extends Simpla
                 // Связанные товары
                 $related_products2 = $this->products->get_related_products2(array('product_id'=>$product->id));
 
+                  $documents = $this->document->get($product->id);
+                
             } else {
                 // Сразу активен
                 $product = new \stdClass();
@@ -376,7 +402,12 @@ class ProductAdmin extends Simpla
             $options = $temp_options;
         }
 
-
+  if (!empty($product->id)) {
+            if (empty($documents) ) {
+                $documents = $this->document->get($product->id);
+            }
+            $this->design->assign('documents', $documents);
+        }
 
         $this->design->assign('product', $product);
 
