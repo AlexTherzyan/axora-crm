@@ -217,6 +217,13 @@
 			<li class="tabs__nav-item">
 				<a href="#specifications" class="tabs__nav-link">Характеристики</a>
 			</li>
+			
+			 {if $documents}
+                <li class="tabs__nav-item">
+                    <a href="#documents" class="tabs__nav-link">Документы</a>
+                </li>
+            {/if}
+			
 			 {if $product->youtube_link}
                     <li class="tabs__nav-item">
                         <a href="#video" class="tabs__nav-link">Видео</a>
@@ -247,6 +254,25 @@
 					</table>
 				{/if}
 			</div>
+			
+			 {if $documents}
+      			
+                <div class="tabs__item" id="documents">
+					<div class="table_description">Сопроводительная документация</div>
+                    <table class="table-description" style="max-width: 600px;" itemprop="additionalProperty"
+                           itemscope="" itemtype="http://schema.org/PropertyValue">
+                        {foreach $documents as $document}
+                            <tr>
+                                <td><strong itemprop="name">{$document->name}</strong></td>
+                                <td itemprop="value"><a
+                                            href="{$config->root_url}/files/documents/{$document->document}"><i
+                                                class="fa fa-download"></i> Скачать</a></td>
+                            </tr>
+                        {/foreach}
+                    </table>
+
+                </div>
+            {/if}
 			
 			 {if $product->youtube_link}
                     <div class="tabs__item" id="video">
