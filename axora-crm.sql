@@ -688,6 +688,7 @@ CREATE TABLE `s_products` (
   `meta_description` varchar(500) NOT NULL,
   `created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `featured` tinyint(1) DEFAULT NULL,
+  `youtube_link` varchar(500) DEFAULT NULL,
   `new` tinyint(1) NOT NULL DEFAULT '0',
   `discounted` tinyint(1) NOT NULL DEFAULT '0',
   `rating` float(3,2) NOT NULL DEFAULT '0.00',
