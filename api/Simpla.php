@@ -32,6 +32,7 @@ namespace Api;
  * @property Notify $notify
  * @property Managers $managers
  * @property Rating $rating
+ * @property Document $document
  * @property Compares $compares
  * @property Tags $tags
  */
@@ -71,6 +72,7 @@ class Simpla
         'managers'   => '\Api\Managers',
         'compares'   => '\Api\Compares',
         'rating'     => '\Api\Rating',
+         'document' => '\Api\Document',
         'tags'       => '\Api\Tags',
     );
 
