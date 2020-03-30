@@ -22,6 +22,16 @@ SET time_zone = "+00:00";
 -- База данных: `lrogiixt_simpla`
 --
 
+--
+-- Структура таблицы `s_product_documents`
+--
+CREATE TABLE `s_product_documents` (
+  `id` int(11) NOT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `document` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+
 -- --------------------------------------------------------
 
 --
