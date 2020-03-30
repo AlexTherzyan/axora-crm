@@ -714,6 +714,10 @@
 					<label for="meta_description" class="property">Описание</label>
 					<textarea id="meta_description" name="meta_description" class="simpla_inp">{$product->meta_description|escape}</textarea>
 				</li>
+				<li>
+					<label for="youtube_link" class="property">Код ссылки на youtube</label>
+					<input id="youtube_link" name="youtube_link" class="simpla_inp" type="text" value="{$product->youtube_link|escape}"/>
+				</li>
 			</ul>
 		</div>
 		<!-- Параметры страницы (The End)-->
