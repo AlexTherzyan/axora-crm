@@ -72,6 +72,8 @@ brands_images_dir = files/brands/;
 ;Файл изображения с водяным знаком
 watermark_file = simpla/files/watermark/watermark.png;
 
+documents_dir = files/documents/;
+
 [files]
 
 ;Директория хранения цифровых товаров
