@@ -20,6 +20,9 @@ class ProductView extends View
         if (empty($product) || (!$product->visible && empty($_SESSION['admin']))) {
             return false;
         }
+        
+          $documents = $this->document->get($product->id);
+        $this->design->assign('documents',$documents);
 
         $rating = $this->rating->calculateRating($product->id);
         $this->design->assign('in_product_page_rating',$rating);
