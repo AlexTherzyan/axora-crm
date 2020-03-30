@@ -44,6 +44,46 @@
 	<script src="design/js/autocomplete/jquery.autocomplete-min.js"></script>
 	<script>
 		$(function () {
+		
+		     var new_document = $('#new_document').clone(true);
+            $('#new_document').remove().removeAttr('id');
+            $("#add_document").on('click', function () {
+                $(new_document).clone(true).appendTo('.js-document-list').fadeIn('slow').find("input[name*=document]").focus();
+                return false;
+            });
+            $('.delete_document_values').live('click', function () {
+                $(this).closest('.new_document').remove();
+            });
+
+            $('.delete_document').live('click', function (e) {
+
+                e.preventDefault();
+
+                let docId = $(this).data('document-id'),
+                    self = $(this)
+                ;
+
+
+                $.ajax({
+                    url: "ajax/delete_product_document.php",
+                    data: {
+                        id: docId
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+
+                        if (data.success === true) {
+                            self.closest('ul').remove();
+                        } else {
+                            console.log(data.error);
+                        }
+                    },
+                    error: function (request, status, error) {
+                        console.log(error);
+                    }
+                });
+
+            });
 
 			// Добавление категории
 			$('#product_categories .add').click(function () {
@@ -896,6 +936,47 @@
 			</div>
 			<input type="text" name="related" id="related_products2" class="input_autocomplete" placeholder="Выберите товар чтобы добавить его">
 		</div>
+
+
+        <div class="block layer">
+            <h2>Документы <span class="add" id="add_document"><i class="dash_link"></i></span></h2>
+
+            <div class="js-document-list">
+
+                {if $documents }
+                    {foreach $documents as $document }
+                        <ul id="" class="new_document">
+
+                            <li class="variant_sku">
+                                <input name="exist_document[{$document->id}]" type="text" value="{$document->name}"/>
+                                <button type="button" data-document-id="{$document->id}" class="delete_document"
+                                        style="display: inline;">x
+                                </button>
+                            </li>
+                            <li class="variant_price">
+                                <a href="{$config->root_url}/files/documents/{$document->document}">Просмотр</a>
+                            </li>
+
+                        </ul>
+                    {/foreach}
+                {/if}
+
+            </div>
+
+        </div>
+
+
+        <ul id="new_document" class="new_document" style="display:none;">
+
+            <li class="variant_sku">
+                <input name="document[name][]" type="text" value=""/>
+                <button class="delete_document_values" style="display: inline;">x</button>
+            </li>
+            <li class="variant_price">
+                <input type="file" name="documents[]">
+            </li>
+
+        </ul>
 
 
 		<input class="button_green button_save" type="submit" name="save" value="Сохранить"/>
