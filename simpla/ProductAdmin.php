@@ -30,7 +30,7 @@ class ProductAdmin extends Simpla
             $product->meta_title = $this->request->post('meta_title');
             $product->meta_keywords = $this->request->post('meta_keywords');
             $product->meta_description = $this->request->post('meta_description');
-
+            $product->youtube_link = $this->request->post('youtube_link');
             $product->annotation = $this->request->post('annotation');
             $product->body = $this->request->post('body');
 
