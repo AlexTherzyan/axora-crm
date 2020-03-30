@@ -217,6 +217,11 @@
 			<li class="tabs__nav-item">
 				<a href="#specifications" class="tabs__nav-link">Характеристики</a>
 			</li>
+			 {if $product->youtube_link}
+                    <li class="tabs__nav-item">
+                        <a href="#video" class="tabs__nav-link">Видео</a>
+                    </li>
+                {/if}
 			<li class="tabs__nav-item">
 				<a href="#reviews" class="tabs__nav-link">Отзывы</a>
 			</li>
@@ -242,6 +247,14 @@
 					</table>
 				{/if}
 			</div>
+			
+			 {if $product->youtube_link}
+                    <div class="tabs__item" id="video">
+
+						<iframe width="560" height="315" src="https://www.youtube.com/embed/{$product->youtube_link|escape}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+                    </div>
+                {/if}
 
 			<div class="tabs__item" id="reviews">
 				<div class="add-review">
@@ -304,6 +317,8 @@
 						</form>
 					</div>
 				</div>
+				
+				
 
 				<div class="reviews">
 					<div class="reviews__content">
