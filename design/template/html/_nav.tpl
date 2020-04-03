@@ -11,7 +11,7 @@
                             {if $c->visible}
                                 <li class="menu__item">
                                     <div class="menu__row {if $c->subcategories}has-dropdown{/if}">
-                                        <a href="catalog/{$c->url}" data-category="{$c->id}" class="menu__link {if isset($category) && $c->id == $category->id}is-active-category{/if} ">
+                                        <a href="catalog/{$c->url}" data-category="{$c->id}" class="menu__link">
                                             {if $c->image}
                                                 <span class="menu__icon"><img src="{$config->categories_images_dir}{$c->image}" alt="{$c->name|escape}"></span>
                                             {elseif $c->icon}
