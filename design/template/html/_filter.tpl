@@ -27,7 +27,7 @@
                                 {foreach $category_sidebar->subcategories as $s}
                                     {if $s->visible}
                                         <div class="form-check">
-                                            <a class="{if isset($category) && $s->id == $category->id}is-active-category{/if} " href="{$config->root_url}/catalog/{$s->url}">
+                                            <a class="{if isset($category) && $s->id == $category->id}link is-active{/if} " href="{$config->root_url}/catalog/{$s->url}">
                                                 <span>{$s->name|escape}{if isset($s->products_count)} <span class="b-filter__count">{$s->products_count|escape}</span>{/if}</span>
                                             </a>
                                         </div>
