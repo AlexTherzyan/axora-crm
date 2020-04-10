@@ -32,6 +32,19 @@ CREATE TABLE `s_product_documents` (
   `name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
 
+ALTER TABLE `s_product_documents`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT для сохранённых таблиц
+--
+
+--
+-- AUTO_INCREMENT для таблицы `s_product_documents`
+--
+ALTER TABLE `s_product_documents`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+COMMIT;
 -- --------------------------------------------------------
 
 --
