@@ -87,11 +87,13 @@
 			<div class="basket-footer__total-main">Итого к оплате: {$order->total_price|convert}&nbsp;{$currency->sign}</div>
 		{/if}
 	</div>
-
+ {if $order->paid == 0}
 	<div class="basket-footer__buttons">
 		<div class="basket-footer__buttons-item">
 			{*  Форма оплаты, генерируется модулем оплаты*}
 			{checkout_form order_id=$order->id module=$payment_method->module}
 		</div>
 	</div>
+	        {/if}
+
 </div>
