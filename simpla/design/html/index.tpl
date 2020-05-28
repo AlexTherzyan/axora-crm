@@ -361,38 +361,20 @@
 <script>
 	$(function () {
 
-		if ($.browser.opera)
-			$("#logout").hide();
-
-		$("#logout").click(function (event) {
+	$("#logout").click(function (event) {
 			event.preventDefault();
 
-			if ($.browser.msie) {
-				try {
-					document.execCommand("ClearAuthenticationCache");
-				}
-				catch (exception) {
-				}
-				window.location.href = '/';
-			}
-			else {
-				$.ajax({
-					url: $(this).attr('href'),
-					username: '',
-					password: '',
-					complete: function () {
-						window.location.href = '/';
-					},
-					beforeSend: function (req) {
-						req.setRequestHeader('Authorization', 'Basic');
-					}
-				});
-			}
-		});
-		{/literal}
 
+			let out = window.location.href.replace(/:\/\//, '://log:out@');
+			jQuery.get(out).error(function() {
+				window.location = '/';
+			});
+
+		});
+		
 	});
 </script>
+{/literal}
 
 
 
