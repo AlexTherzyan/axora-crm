@@ -75,6 +75,7 @@
 	{*	если мы на странице бренда выводим вместо фильтра категории в которых эти товары находятся	*}
 	{elseif ($brand)}
 		{if $results_categories}
+		  <form class="filter__form js-filter" action="brands/{$brand->url}" >
 			<div class="catalog-section__aside">
 				<ul class="catalog-section__aside-list">
 					{foreach $results_categories as $category}
@@ -84,6 +85,7 @@
 					{/foreach}
 				</ul>
 			</div>
+			</form>
 		{/if}
 	{else}
 		<div data-ajax-filter class="catalog-section__aside">
