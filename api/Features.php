@@ -177,19 +177,10 @@ class Features extends Simpla
             $this->db->query($query);
 
             // Удалим значения из options
-            $query = $this->db->placehold('DELETE o
-											FROM __options o
-											LEFT JOIN __products_categories pc ON pc.product_id=o.product_id
-											WHERE o.feature_id=?
-											AND pc.position=( SELECT MIN(pc2.position) 
-											                    FROM __products_categories pc2 
-											                    WHERE pc.product_id=pc2.product_id)
-											AND pc.category_id NOT IN(?@)', $id, $categories);
-            $this->db->query($query);
+            //код удален
         } else {
             // Удалим значения из options
-            $query = $this->db->placehold('DELETE o FROM __options o WHERE o.feature_id=?', $id);
-            $this->db->query($query);
+          //код удален
         }
     }
 
