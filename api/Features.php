@@ -4,8 +4,8 @@ namespace Api;
 
 class Features extends Simpla
 {
-    /**
-     * @param  array $filter
+     /**
+     * @param array $filter
      * @return array|false
      */
     public function get_features($filter = array())
@@ -15,15 +15,26 @@ class Features extends Simpla
         $id_filter = '';
 
         if (isset($filter['category_id'])) {
-            $category_id_filter = $this->db->placehold('AND id IN ( SELECT feature_id 
+
+            $show_in_product_filter = '';
+
+            if (isset($filter['show_in_product'])) {
+                $show_in_product_filter = ' AND cf.in_product=1';
+            }
+            if (isset($filter['in_filter'])) {
+                $show_in_product_filter = ' AND cf.in_filter=1';
+            }
+
+            $category_id_filter = $this->db->placehold("AND id IN ( SELECT feature_id 
                                                                     FROM __categories_features cf 
-                                                                    WHERE cf.category_id IN(?@) 
-                                                                    )', (array)$filter['category_id']);
+                                                                    WHERE cf.category_id IN(?@)
+                                                                    $show_in_product_filter 
+                                                                    )", (array)$filter['category_id']);
         }
 
-        if (isset($filter['in_filter'])) {
-            $in_filter_filter = $this->db->placehold('AND f.in_filter=?', intval($filter['in_filter']));
-        }
+//        if (isset($filter['in_filter'])) {
+//            $in_filter_filter = $this->db->placehold('AND f.in_filter=?', intval($filter['in_filter']));
+//        }
 
         if (!empty($filter['id'])) {
             $id_filter = $this->db->placehold('AND f.id IN(?@)', (array)$filter['id']);
@@ -46,7 +57,7 @@ class Features extends Simpla
     }
 
     /**
-     * @param  int $id
+     * @param int $id
      * @return false|object
      */
     public function get_feature($id)
@@ -65,17 +76,32 @@ class Features extends Simpla
     }
 
     /**
-     * @param  int $id
+     * @param int $id
      * @return array|false
      */
     public function get_feature_categories($id)
     {
-        $query = $this->db->placehold('SELECT cf.category_id
+
+
+        $query = $this->db->placehold("SELECT cf.category_id
 										FROM __categories_features cf
-										WHERE cf.feature_id = ?', $id);
+										WHERE cf.feature_id = ?										
+										", $id);
         $this->db->query($query);
         return $this->db->results('category_id');
     }
+
+    public function get_full_fields_feature_categories($id)
+    {
+        $query = $this->db->placehold("SELECT *
+										FROM __categories_features cf
+										WHERE cf.feature_id = ?										
+										", $id);
+        $this->db->query($query);
+        return $this->db->results();
+    }
+
+
 
     /**
      * @param  array|object $feature
